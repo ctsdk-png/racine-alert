@@ -125,9 +125,26 @@ footer {text-align:center;padding:24px 16px 32px;color:var(--muted);
     </a>
   </div>
 
-  <div class="section-head">
-    <div><h2>Community alerts</h2>
-    <div class="sub">Example cards for the dashboard design</div></div>
+ 
+<div class="section-head">
+  <div>
+    <h2>Official Weather Alerts</h2>
+    <div class="sub">Racine, Wisconsin · National Weather Service</div>
+  </div>
+  <span class="tag">LIVE FEED</span>
+</div>
+
+<div id="weatherAlerts" class="resources" aria-live="polite">
+  <div class="card">
+    <strong>Checking official weather alerts…</strong>
+    <p>Connecting to the National Weather Service.</p>
+  </div>
+</div>
+
+<p class="sub">
+  Weather information is provided by the National Weather Service.
+  Always open the official alert for complete instructions.
+</p>
     <span class="tag demo">DEMO DATA</span>
   </div>
   <div class="card alert">
@@ -204,6 +221,96 @@ footer {text-align:center;padding:24px 16px 32px;color:var(--muted);
 </footer>
 
 <script>
+
+const weatherBox = document.getElementById("weatherAlerts");
+
+async function loadRacineWeatherAlerts() {
+  const officialUrl =
+    "https://api.weather.gov/alerts/active?point=42.7261,-87.7829";
+
+  try {
+    const response = await fetch(officialUrl, {
+      headers: { Accept: "application/geo+json" }
+    });
+
+    if (!response.ok) throw new Error("Feed unavailable");
+
+    const data = await response.json();
+    const alerts = data.features || [];
+
+    weatherBox.replaceChildren();
+
+    if (alerts.length === 0) {
+      const card = document.createElement("div");
+      card.className = "card";
+      const title = document.createElement("strong");
+      title.textContent = "No active NWS alerts returned for this location";
+      const note = document.createElement("p");
+      note.textContent =
+        "This does not mean all hazards are absent. Check official sources for updates.";
+      card.append(title, note);
+      weatherBox.append(card);
+    }
+
+    alerts.forEach(item => {
+      const p = item.properties || {};
+      const card = document.createElement("div");
+      card.className = "card alert";
+
+      const title = document.createElement("strong");
+      title.textContent = p.event || "Weather alert";
+
+      const headline = document.createElement("p");
+      headline.textContent = p.headline || p.description ||
+        "Open the official source for details.";
+
+      const severity = document.createElement("p");
+      severity.textContent =
+        "Severity: " + (p.severity || "Not specified");
+
+      card.append(title, headline, severity);
+
+      if (p.ends) {
+        const end = document.createElement("p");
+        end.className = "sub";
+        end.textContent = "Alert ends: " +
+          new Date(p.ends).toLocaleString();
+        card.append(end);
+      }
+
+      const link = document.createElement("a");
+      link.href = "https://www.weather.gov/mkx/";
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Official NWS Milwaukee office ↗";
+      link.style.cssText =
+        "display:inline-block;margin-top:10px;color:#2459d3;font-weight:700;font-size:13px";
+      card.append(link);
+
+      weatherBox.append(card);
+    });
+  } catch (error) {
+    weatherBox.replaceChildren();
+
+    const card = document.createElement("div");
+    card.className = "card";
+    const title = document.createElement("strong");
+    title.textContent = "Weather feed temporarily unavailable";
+    const note = document.createElement("p");
+    note.textContent =
+      "Check the official National Weather Service website directly.";
+    const link = document.createElement("a");
+    link.href = "https://www.weather.gov/mkx/";
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = "Open official weather updates ↗";
+
+    card.append(title, note, link);
+    weatherBox.append(card);
+  }
+}
+
+loadRacineWeatherAlerts();
 const toggle = document.getElementById("toggleReport");
 const form = document.getElementById("reportForm");
 const message = document.getElementById("reportMessage");
