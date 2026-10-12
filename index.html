@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101a32">
-  <meta name="description" content="Racine Alert — public safety resources and official weather alerts for Racine, Wisconsin.">
-  <title>Racine Alert | Public Safety</title>
+  <meta name="description" content="Racine Alert — a Racine County, Wisconsin public-safety prototype.">
+  <title>Racine Alert | Racine County, Wisconsin</title>
 
   <style>
     :root {
@@ -95,7 +95,6 @@
     }
 
     main { padding: 22px 0 36px; }
-
     section { margin-bottom: 28px; }
 
     .section-head {
@@ -173,7 +172,6 @@
     }
 
     .weather-card.severe { border-left-color: var(--red); }
-
     .weather-card h3 { font-size: 17px; }
 
     .status {
@@ -275,20 +273,20 @@
         <div class="logo" aria-hidden="true">R</div>
         <div>
           <h1>Racine Alert</h1>
-          <p>PUBLIC SAFETY · RACINE, WISCONSIN</p>
+          <p>RACINE COUNTY · WISCONSIN</p>
         </div>
       </div>
 
       <p class="hero-copy">
-        A central place to find emergency contacts, official weather
-        information, and public-safety resources for the Racine community.
+        A community-focused public-safety prototype designed specifically
+        for Racine County, Wisconsin.
       </p>
 
       <div class="notice">
-        <strong>In an emergency, call 911.</strong>
-        This independent website is not an emergency dispatch service
-        and is not affiliated with the City of Racine or the National
-        Weather Service.
+        <strong>Emergency? Call 911.</strong>
+        Racine Alert is an independent prototype and is not operated by
+        Racine County or an emergency dispatch agency. It does not replace
+        official emergency notifications or services.
       </div>
     </div>
   </header>
@@ -297,14 +295,14 @@
     <section>
       <div class="section-head">
         <div>
-          <h2>Quick Access</h2>
-          <p class="sub">Important contacts and trusted resources.</p>
+          <h2>Racine County Quick Access</h2>
+          <p class="sub">Emergency contacts and trusted resources.</p>
         </div>
       </div>
 
       <div class="grid">
         <article class="card">
-          <h3>🚨 Emergency</h3>
+          <h3>🚨 Emergency Services</h3>
           <p>Police, fire, or medical emergency.</p>
           <a class="resource-link" href="tel:911">Call 911 ↗</a>
         </article>
@@ -316,27 +314,33 @@
         </article>
 
         <article class="card">
-          <h3>🤝 Community Help</h3>
-          <p>Find local social services and assistance.</p>
-          <a class="resource-link" href="https://211wisconsin.communityos.org/" target="_blank" rel="noopener noreferrer">Wisconsin 211 ↗</a>
+          <h3>🤝 Wisconsin 211</h3>
+          <p>Find community assistance and social services.</p>
+          <a class="resource-link"
+             href="https://211wisconsin.communityos.org/"
+             target="_blank" rel="noopener noreferrer">Find assistance ↗</a>
         </article>
 
         <article class="card">
-          <h3>🌦️ Official Weather</h3>
-          <p>Warnings, watches, and weather forecasts.</p>
-          <a class="resource-link" href="https://www.weather.gov/mkx/" target="_blank" rel="noopener noreferrer">NWS Milwaukee ↗</a>
+          <h3>🌦️ County Weather Alerts</h3>
+          <p>Official alerts filtered to the Racine County zone.</p>
+          <a class="resource-link" href="#weather">View county alerts ↓</a>
         </article>
 
         <article class="card">
-          <h3>🏛️ City Information</h3>
-          <p>Official City of Racine services and notices.</p>
-          <a class="resource-link" href="https://www.cityofracine.org/" target="_blank" rel="noopener noreferrer">Visit City Website ↗</a>
+          <h3>🏛️ County Information</h3>
+          <p>Official Racine County services and information.</p>
+          <a class="resource-link"
+             href="https://www.racinecounty.com/"
+             target="_blank" rel="noopener noreferrer">Racine County website ↗</a>
         </article>
 
         <article class="card">
-          <h3>🛟 Emergency Planning</h3>
-          <p>Prepare for disasters and other hazards.</p>
-          <a class="resource-link" href="https://ready.gov/" target="_blank" rel="noopener noreferrer">Ready.gov ↗</a>
+          <h3>🛟 Emergency Preparedness</h3>
+          <p>Learn how to prepare for emergencies and disasters.</p>
+          <a class="resource-link"
+             href="https://www.ready.gov/"
+             target="_blank" rel="noopener noreferrer">Preparedness resources ↗</a>
         </article>
       </div>
     </section>
@@ -344,50 +348,56 @@
     <section id="weather">
       <div class="section-head">
         <div>
-          <h2>Official Weather Alerts</h2>
-          <p class="sub">Racine, Wisconsin · National Weather Service</p>
+          <h2>Racine County Weather Alerts</h2>
+          <p class="sub">Racine County, Wisconsin · County-zone feed</p>
         </div>
-        <span class="tag">NWS FEED</span>
+        <span class="tag">COUNTY FOCUS</span>
       </div>
 
       <div id="weatherStatus" class="card" aria-live="polite">
-        <strong>Checking the official weather feed…</strong>
-        <p class="sub">Alert information may be temporarily unavailable.</p>
+        <strong>Checking Racine County alerts…</strong>
+        <p class="sub">Connecting to the official county-zone feed.</p>
       </div>
 
       <div id="weatherAlerts" aria-live="polite"></div>
 
       <div style="margin: 12px 0 18px;">
         <button class="button" id="refreshWeather" type="button">
-          Refresh Weather Alerts
+          Refresh Racine County Alerts
         </button>
       </div>
 
       <div class="card">
-        <strong>Check the official source</strong>
+        <strong>About county coverage</strong>
         <p>
-          Always verify an alert's affected area, expiration time, and
-          instructions. This feed does not cover every kind of public-safety
-          incident.
+          This prototype requests weather alerts associated with the
+          Racine County zone. The issuing agency's name may differ from
+          the county being served. Always verify warnings and instructions
+          through the official source.
         </p>
-        <a class="resource-link" href="https://www.weather.gov/mkx/" target="_blank" rel="noopener noreferrer">Open NWS Milwaukee ↗</a>
+        <a class="resource-link"
+           href="https://api.weather.gov/alerts/active?zone=WIC101"
+           target="_blank" rel="noopener noreferrer">
+          Open official Racine County zone feed ↗
+        </a>
       </div>
     </section>
 
     <section>
       <div class="section-head">
         <div>
-          <h2>Community Information</h2>
-          <p class="sub">A space for future verified community notices.</p>
+          <h2>Racine County Community Information</h2>
+          <p class="sub">Future space for verified county-specific notices.</p>
         </div>
       </div>
 
       <div class="card">
-        <strong>Community notices are not connected yet</strong>
+        <strong>Community alerts are not connected yet</strong>
         <p>
-          This version does not receive live police reports, crime reports,
-          or community-submitted incident alerts. Only information verified
-          through an official source should be published here.
+          This prototype does not receive live police dispatches, crime
+          reports, emergency-service calls, or community-submitted reports.
+          Notices should be verified with the relevant official authority
+          before publication.
         </p>
       </div>
     </section>
@@ -395,7 +405,7 @@
     <section id="report">
       <div class="section-head">
         <div>
-          <h2>Incident Report Demo</h2>
+          <h2>Racine County Incident Report Demo</h2>
           <p class="sub">Preview a report locally on this device.</p>
         </div>
         <span class="tag">DEMO ONLY</span>
@@ -404,13 +414,13 @@
       <div class="card">
         <p>
           <strong>Important:</strong> This form does not contact emergency
-          services, submit a report to the City, or save information to a
-          server. Do not include sensitive personal information.
+          services, submit a report to Racine County, or save information
+          to a server. Do not enter sensitive personal information.
         </p>
 
         <form id="reportForm">
           <div class="field">
-            <label for="incidentType">Type of incident</label>
+            <label for="incidentType">Type of concern</label>
             <select id="incidentType" required>
               <option value="">Choose a category</option>
               <option>Road hazard</option>
@@ -422,9 +432,10 @@
           </div>
 
           <div class="field">
-            <label for="incidentLocation">General location</label>
+            <label for="incidentLocation">Location in Racine County</label>
             <input id="incidentLocation" maxlength="150"
-              placeholder="Street or nearby landmark" required>
+              placeholder="Street, community, or nearby landmark"
+              required>
           </div>
 
           <div class="field">
@@ -434,7 +445,9 @@
               required></textarea>
           </div>
 
-          <button class="button gold" type="submit">Preview Demo Report</button>
+          <button class="button gold" type="submit">
+            Preview Demo Report
+          </button>
         </form>
 
         <div id="reportPreview" class="demo-result" aria-live="polite"></div>
@@ -445,9 +458,12 @@
   <footer>
     <div class="container">
       <strong>Racine Alert</strong>
-      <p>Independent community safety information project.</p>
-      <p>Weather data source: National Weather Service (NWS).</p>
-      <p>Always follow official emergency instructions. Call 911 for emergencies.</p>
+      <p>Independent Racine County public-safety prototype.</p>
+      <p>Weather information source: National Weather Service.</p>
+      <p>
+        Not an official government service or emergency dispatch system.
+        For emergencies, call 911.
+      </p>
     </div>
   </footer>
 
@@ -456,16 +472,16 @@
     const weatherStatus = document.getElementById("weatherStatus");
     const refreshButton = document.getElementById("refreshWeather");
 
-    const nwsUrl =
-      "https://api.weather.gov/alerts/active?point=42.7261,-87.7829";
+    const racineCountyFeed =
+      "https://api.weather.gov/alerts/active?zone=WIC101";
 
-    function makeTextElement(tag, text) {
+    function weatherText(tag, value) {
       const element = document.createElement(tag);
-      element.textContent = text;
+      element.textContent = value;
       return element;
     }
 
-    function makeWeatherLink(url, label) {
+    function weatherLink(url, label) {
       const link = document.createElement("a");
       link.href = url;
       link.target = "_blank";
@@ -475,17 +491,16 @@
       return link;
     }
 
-    function showWeatherFallback(message) {
-      weatherStatus.replaceChildren();
-      weatherStatus.append(
-        makeTextElement("strong", message),
-        makeTextElement(
+    function showCountyFeedError() {
+      weatherStatus.replaceChildren(
+        weatherText("strong", "County weather feed unavailable"),
+        weatherText(
           "p",
-          "The live feed could not be confirmed. This does not mean there are no active hazards."
+          "Racine County alerts could not be verified. Check the official county-zone feed directly."
         ),
-        makeWeatherLink(
-          "https://www.weather.gov/mkx/",
-          "Check official NWS weather information ↗"
+        weatherLink(
+          racineCountyFeed,
+          "Open Racine County alert feed ↗"
         )
       );
     }
@@ -493,39 +508,40 @@
     async function loadRacineWeatherAlerts() {
       refreshButton.disabled = true;
       refreshButton.textContent = "Refreshing…";
+
       weatherStatus.replaceChildren(
-        makeTextElement("strong", "Loading official weather alerts…")
+        weatherText("strong", "Checking Racine County alerts…")
       );
       weatherBox.replaceChildren();
 
       try {
-        const response = await fetch(nwsUrl, {
-          headers: {
-            "Accept": "application/geo+json"
-          },
+        const response = await fetch(racineCountyFeed, {
+          headers: { Accept: "application/geo+json" },
           cache: "no-store"
         });
 
         if (!response.ok) {
-          throw new Error("Weather service returned " + response.status);
+          throw new Error("County alert feed unavailable");
         }
 
         const data = await response.json();
-        const alerts = Array.isArray(data.features) ? data.features : [];
+        const alerts = Array.isArray(data.features)
+          ? data.features
+          : [];
 
         weatherStatus.replaceChildren(
-          makeTextElement("strong", "Weather feed connected"),
-          makeTextElement(
+          weatherText("strong", "Racine County feed connected"),
+          weatherText(
             "p",
-            "Feed checked: " + new Date().toLocaleString()
+            "Last checked: " + new Date().toLocaleString()
           )
         );
 
         if (alerts.length === 0) {
           weatherStatus.append(
-            makeTextElement(
+            weatherText(
               "p",
-              "No active alerts were returned for the selected point. Check the official NWS site for updates."
+              "No active alerts were returned for the Racine County zone. This does not guarantee that all hazards are absent."
             )
           );
           return;
@@ -544,20 +560,16 @@
           }
 
           card.append(
-            makeTextElement("h3", p.event || "Weather alert"),
-            makeTextElement(
-              "p",
-              "Affected area: " + (p.areaDesc || "Not specified")
-            )
+            weatherText("h3", p.event || "Weather alert")
           );
 
-          const severity = makeTextElement(
+          const severity = weatherText(
             "span",
             "Severity: " + (p.severity || "Not specified")
           );
           severity.className = "status";
 
-          const urgency = makeTextElement(
+          const urgency = weatherText(
             "span",
             "Urgency: " + (p.urgency || "Not specified")
           );
@@ -573,16 +585,15 @@
           card.append(severity, urgency);
 
           card.append(
-            makeTextElement(
+            weatherText(
               "p",
-              p.headline || p.description ||
-                "Open the official source for complete details."
+              "Coverage: Racine County, Wisconsin"
             )
           );
 
           if (p.effective || p.onset) {
             card.append(
-              makeTextElement(
+              weatherText(
                 "p",
                 "Effective: " +
                   new Date(p.effective || p.onset).toLocaleString()
@@ -593,45 +604,40 @@
           const expiration = p.ends || p.expires;
           if (expiration) {
             card.append(
-              makeTextElement(
+              weatherText(
                 "p",
-                "Expires: " + new Date(expiration).toLocaleString()
+                "Expires: " +
+                  new Date(expiration).toLocaleString()
               )
             );
           }
 
-          if (p.instruction) {
-            card.append(
-              makeTextElement("p", "Instructions: " + p.instruction)
-            );
-          }
-
-          const officialAlertUrl =
-            typeof p.web === "string" &&
-            p.web.startsWith("https://")
-              ? p.web
-              : "https://www.weather.gov/mkx/";
-
           card.append(
-            makeWeatherLink(
-              officialAlertUrl,
-              "View official alert details ↗"
+            weatherText(
+              "p",
+              "For full official instructions, open the Racine County zone feed."
+            ),
+            weatherLink(
+              racineCountyFeed,
+              "View official Racine County alerts ↗"
             )
           );
 
           weatherBox.append(card);
         });
       } catch (error) {
-        showWeatherFallback(
-          "The live weather feed is temporarily unavailable."
-        );
+        showCountyFeedError();
       } finally {
         refreshButton.disabled = false;
-        refreshButton.textContent = "Refresh Weather Alerts";
+        refreshButton.textContent = "Refresh Racine County Alerts";
       }
     }
 
-    refreshButton.addEventListener("click", loadRacineWeatherAlerts);
+    refreshButton.addEventListener(
+      "click",
+      loadRacineWeatherAlerts
+    );
+
     loadRacineWeatherAlerts();
 
     document.getElementById("reportForm").addEventListener(
@@ -646,12 +652,13 @@
           document.getElementById("incidentDetails").value.trim();
 
         const preview = document.getElementById("reportPreview");
+
         preview.replaceChildren(
-          makeTextElement("strong", "Demo preview — not submitted"),
-          makeTextElement("p", "Category: " + type),
-          makeTextElement("p", "Location: " + location),
-          makeTextElement("p", "Description: " + details),
-          makeTextElement(
+          weatherText("strong", "Demo preview — not submitted"),
+          weatherText("p", "Category: " + type),
+          weatherText("p", "Location: " + location),
+          weatherText("p", "Description: " + details),
+          weatherText(
             "p",
             "This report has not been sent or saved. Contact the appropriate official service to report a real concern."
           )
