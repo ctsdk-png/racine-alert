@@ -1,39 +1,231 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Racine Alert — Public Safety & Community Updates</title>
-<meta name="description" content="Racine Alert is a prototype for local safety updates and community awareness across Racine County, Wisconsin.">
-<link rel="preconnect" href="https://unpkg.com"><link rel="preconnect" href="https://tile.openstreetmap.org">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101a30">
+<title>Racine Alert | Community Safety</title>
 <style>
-:root{--bg:#090d14;--panel:#111925;--panel2:#172231;--text:#f4f7fb;--muted:#9caabc;--line:#293548;--accent:#f5b942;--red:#ff6b6b;--green:#66d6a0;--blue:#78b7ff}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--blue)}button,input,select,textarea{font:inherit}.top{position:sticky;top:0;z-index:500;background:#090d14ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.nav{max-width:1180px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:.2px}.logo{display:grid;place-items:center;width:38px;height:38px;background:var(--accent);color:#151515;border-radius:12px;font-weight:950}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:1.4px}.pill{font-size:12px;border:1px solid #735b26;color:#ffd77e;background:#33280e;border-radius:999px;padding:6px 10px;white-space:nowrap}.wrap{max-width:1180px;margin:auto;padding:24px 18px 60px}.hero{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin:8px 0 20px}.eyebrow{color:var(--accent);font-size:12px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase}.hero h1{font-size:clamp(28px,5vw,46px);line-height:1.06;letter-spacing:-1.3px;margin:8px 0 12px}.hero p{color:var(--muted);max-width:660px;margin:0}.callout{border:1px solid #735b26;background:#211b10;border-radius:14px;padding:12px 14px;color:#f7d99a;font-size:12px;max-width:265px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px}.stat{padding:15px}.stat b{display:block;font-size:23px}.stat span{color:var(--muted);font-size:12px}.layout{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;align-items:start}.card{overflow:hidden}.cardhead{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 17px;border-bottom:1px solid var(--line)}.cardhead h2{font-size:16px;margin:0}.cardhead span{font-size:12px;color:var(--muted)}#map{height:370px;background:#1b2935}.mapnote{padding:10px 14px;color:var(--muted);font-size:11px;border-top:1px solid var(--line)}.filters{display:flex;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}.filters select,.search{color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px;min-width:0}.search{width:100%;margin:12px 14px 0;width:calc(100% - 28px)}.feed{padding:0 14px 14px;max-height:500px;overflow:auto}.incident{padding:14px 2px;border-bottom:1px solid var(--line)}.incident:last-child{border-bottom:0}.incidenttop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.incident h3{font-size:14px;margin:0 0 5px}.incident p{font-size:12px;color:var(--muted);margin:0 0 8px}.meta{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:11px}.tag{font-size:10px;font-weight:800;letter-spacing:.3px;border-radius:6px;padding:4px 6px;background:#263344;color:#c7d6e7;white-space:nowrap}.tag.demo{background:#382d14;color:#ffdc8a}.tag.official{background:#143526;color:#8de7b8}.empty{padding:22px;text-align:center;color:var(--muted);font-size:13px}.lower{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.pad{padding:17px}.pad h2{margin:0 0 7px;font-size:17px}.pad p{color:var(--muted);font-size:13px;margin:0 0 13px}.resources{display:grid;gap:9px}.resources a{display:block;padding:11px 12px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;text-decoration:none;font-size:13px}.resources a span{display:block;color:var(--muted);font-size:11px;margin-top:2px}.btn{border:0;background:var(--accent);color:#17130a;font-weight:800;padding:11px 14px;border-radius:10px;cursor:pointer}.btn.secondary{background:var(--panel2);border:1px solid var(--line);color:var(--text)}.formgrid{display:grid;gap:10px}.formgrid label{font-size:12px;color:var(--muted);display:grid;gap:5px}.formgrid input,.formgrid select,.formgrid textarea{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--text);padding:10px}.formgrid textarea{min-height:78px;resize:vertical}.notice{background:#1d2530;border:1px solid #46556a;color:#cbd5e1;padding:10px;border-radius:9px;font-size:11px}.footer{color:var(--muted);font-size:11px;text-align:center;padding:26px 8px 0}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#111925;color:#f4f7fb}.leaflet-popup-content{font-size:12px}.leaflet-control-attribution{font-size:9px!important}
-@media(max-width:760px){.hero{display:block}.callout{max-width:none;margin-top:14px}.layout,.lower{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:12px}.stat b{font-size:20px}.wrap{padding:18px 12px 40px}.nav{padding:11px 12px}.brand{font-size:14px}.pill{font-size:10px}#map{height:310px}.feed{max-height:none}}
+:root {
+  --bg:#f3f5f9; --navy:#101a30; --card:#fff;
+  --blue:#2459d3; --muted:#69758a; --line:#e4e8f0;
+  --red:#c62f3a; --gold:#f4bd55;
+}
+* {box-sizing:border-box}
+body {
+  margin:0; background:var(--bg); color:var(--navy);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+header {background:var(--navy);color:white;padding:24px 18px 26px}
+.top {display:flex;align-items:center;gap:12px;max-width:850px;margin:auto}
+.logo {background:var(--gold);color:var(--navy);border-radius:13px;
+  width:48px;height:48px;display:grid;place-items:center;font-size:25px;font-weight:900}
+.brand {font-size:22px;font-weight:800;letter-spacing:.2px}
+.tagline {color:#c5d0e4;font-size:12px;margin-top:4px}
+.hero {max-width:850px;margin:27px auto 0}
+.eyebrow {color:var(--gold);font-size:11px;font-weight:800;letter-spacing:2px}
+h1 {font-size:32px;line-height:1.12;margin:10px 0}
+.hero p {color:#d1d9e7;font-size:14px;line-height:1.6;margin-bottom:0}
+main {max-width:850px;margin:auto;padding:20px 15px 40px}
+.notice {background:#fff5e4;border:1px solid #f0d8a8;padding:12px 14px;
+  border-radius:12px;font-size:12px;line-height:1.5;margin-bottom:22px}
+.section-head {display:flex;justify-content:space-between;align-items:center;gap:8px;margin:24px 0 12px}
+h2 {font-size:18px;margin:0}
+.sub {font-size:12px;color:var(--muted);margin-top:5px}
+.grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card {background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
+.quick {display:flex;flex-direction:column;gap:9px;text-decoration:none;color:inherit;min-height:120px}
+.symbol {font-size:25px}
+.card strong {font-size:14px}
+.card p {color:var(--muted);font-size:12px;line-height:1.5;margin:0}
+.emergency {background:#fff0f0;border-color:#f0caca}
+.emergency .symbol {color:var(--red)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible {
+  outline:3px solid #739aff;outline-offset:3px
+}
+.alert {margin-bottom:11px}
+.alert-top {display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.dot {width:9px;height:9px;border-radius:50%;background:#d89a26}
+.tag {font-size:10px;font-weight:800;letter-spacing:.5px}
+.demo {color:#8a6414;background:#fff2d7;padding:5px 7px;border-radius:6px}
+.alert p {margin-top:8px}
+.alert time {font-size:11px;color:var(--muted)}
+.primary {border:0;border-radius:11px;background:var(--blue);color:white;
+  padding:13px 16px;font-weight:750;font-size:14px;cursor:pointer}
+.secondary {border:1px solid var(--line);border-radius:10px;background:white;
+  color:var(--navy);padding:10px 12px;font-weight:700;cursor:pointer}
+.full {width:100%;margin-top:12px}
+.resources {display:grid;gap:10px}
+.resource {display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:white;border:1px solid var(--line);border-radius:12px;padding:14px}
+.resource span {font-size:13px;font-weight:700}
+.resource small {display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.resource a {color:var(--blue);font-size:12px;font-weight:750;text-decoration:none}
+label {display:block;font-size:12px;font-weight:750;margin:13px 0 6px}
+input,textarea,select {width:100%;padding:12px;border:1px solid #d5dbe6;
+  border-radius:10px;font:inherit;font-size:14px;background:white;color:var(--navy)}
+textarea {min-height:95px;resize:vertical}
+#reportForm {display:none;margin-top:12px}
+#reportForm.open {display:block}
+footer {text-align:center;padding:24px 16px 32px;color:var(--muted);
+  font-size:11px;line-height:1.7}
+@media(min-width:600px) {
+  header {padding:28px 25px}
+  .hero {margin-top:35px}
+  h1 {font-size:40px}
+  main {padding:24px 24px 45px}
+  .grid {grid-template-columns:repeat(4,minmax(0,1fr))}
+}
 </style>
 </head>
 <body>
-<header class="top"><div class="nav"><div class="brand"><div class="logo">RA</div><div>RACINE ALERT<small>LOCAL SAFETY • COMMUNITY AWARENESS</small></div></div><div class="pill">PROTOTYPE · DEMO DATA</div></div></header>
-<main class="wrap">
-<section class="hero"><div><div class="eyebrow">Racine County, Wisconsin</div><h1>Know what's happening<br>in your community.</h1><p>A proposed home for local safety updates, incident awareness, and official community information across Racine County.</p></div><div class="callout"><strong>Prototype notice</strong><br>This is a design demo. Incidents shown below are fictional examples—not live emergency reports. For an emergency, call 911.</div></section>
-<section class="stats"><div class="stat"><b id="count">3</b><span>Sample incidents in this demo</span></div><div class="stat"><b>Countywide</b><span>Planned coverage area</span></div><div class="stat"><b>In development</b><span>Live feeds not connected</span></div></section>
-<section class="layout"><div class="card"><div class="cardhead"><h2>Incident map</h2><span>Sample locations</span></div><div id="map" aria-label="Map of Racine County with fictional sample incidents"></div><div class="mapnote">Map tiles © OpenStreetMap contributors. Map is for demonstration only; pins are illustrative, not active incidents.</div></div>
-<div class="card"><div class="cardhead"><h2>Recent community updates</h2><span id="feedCount">3 examples</span></div><div class="filters"><select id="categoryFilter" aria-label="Filter by incident type"><option value="all">All categories</option><option>Traffic</option><option>Weather</option><option>Fire</option><option>Community</option></select><select id="areaFilter" aria-label="Filter by area"><option value="all">All areas</option><option>Racine</option><option>Mount Pleasant</option><option>Sturtevant</option></select></div><input class="search" id="search" placeholder="Search sample updates…" aria-label="Search sample updates"><div class="feed" id="feed"></div></div></section>
-<section class="lower"><div class="card pad"><h2>Official information</h2><p>Use official sources for current instructions and emergency information. These links are starting points, not live feed integrations.</p><div class="resources"><a href="https://www.cityofracine.org/" target="_blank" rel="noopener">City of Racine<span>Municipal information and announcements</span></a><a href="https://www.racinecounty.com/" target="_blank" rel="noopener">Racine County<span>County services and public information</span></a><a href="https://www.weather.gov/mkx/" target="_blank" rel="noopener">National Weather Service — Milwaukee/Sullivan<span>Official weather forecasts and alerts</span></a><a href="https://511wi.gov/" target="_blank" rel="noopener">511 Wisconsin<span>Road conditions and travel information</span></a></div></div>
-<div class="card pad"><h2>Submit a community report</h2><p>Future feature concept. This demo does not transmit reports to anyone.</p><div class="notice">Do not submit emergencies here. Call 911 for immediate danger. Never include private personal details or accuse an identifiable person of a crime in a public post.</div><form id="reportForm" class="formgrid" style="margin-top:12px"><label>Report category<select id="reportCategory" required><option value="Traffic">Traffic / road issue</option><option value="Weather">Weather impact</option><option value="Fire">Fire / smoke observation</option><option value="Community">Community concern</option></select></label><label>Area or nearest public intersection<input id="reportArea" required maxlength="100" placeholder="e.g., Racine, near Main St"></label><label>What did you observe?<textarea id="reportDetails" required maxlength="500" placeholder="Describe only what you personally observed."></textarea></label><button class="btn" type="submit">Preview report (demo only)</button><div id="formMessage" class="notice" role="status" hidden></div></form></div></section>
-<div class="footer">Racine Alert is a working concept and is not affiliated with any government agency. It does not replace 911 or official emergency alerts. No live incident data, accounts, report delivery, or push notifications are connected in this prototype.</div>
+<header>
+  <div class="top">
+    <div class="logo" aria-hidden="true">R</div>
+    <div>
+      <div class="brand">RACINE ALERT</div>
+      <div class="tagline">COMMUNITY SAFETY • LOCAL AWARENESS</div>
+    </div>
+  </div>
+  <div class="hero">
+    <div class="eyebrow">YOUR COMMUNITY. YOUR SAFETY.</div>
+    <h1>Stay informed.<br>Stay prepared.</h1>
+    <p>A community-focused place for safety resources, local awareness,
+    and emergency information.</p>
+  </div>
+</header>
+
+<main>
+  <div class="notice">
+    <strong>Important:</strong> This is an early prototype. Sample alerts
+    are not verified live incidents. This site is not monitored by emergency
+    dispatchers and does not replace official emergency services.
+  </div>
+
+  <div class="section-head">
+    <div><h2>Quick access</h2><div class="sub">Get help or find support</div></div>
+  </div>
+  <div class="grid">
+    <a class="card quick emergency" href="tel:911">
+      <span class="symbol">🚨</span><strong>Call 911</strong>
+      <p>Immediate police, fire, or medical emergencies.</p>
+    </a>
+    <a class="card quick" href="tel:988">
+      <span class="symbol">💙</span><strong>Crisis support</strong>
+      <p>Call or text 988 in the United States.</p>
+    </a>
+    <a class="card quick" href="https://www.211.org/">
+      <span class="symbol">🤝</span><strong>Community help</strong>
+      <p>Find local services through 211.</p>
+    </a>
+    <a class="card quick" href="https://www.weather.gov/">
+      <span class="symbol">🌦️</span><strong>Weather alerts</strong>
+      <p>Check official weather warnings and forecasts.</p>
+    </a>
+  </div>
+
+  <div class="section-head">
+    <div><h2>Community alerts</h2>
+    <div class="sub">Example cards for the dashboard design</div></div>
+    <span class="tag demo">DEMO DATA</span>
+  </div>
+  <div class="card alert">
+    <div class="alert-top"><span class="dot"></span>
+      <span class="tag">COMMUNITY NOTICE</span>
+      <span class="tag demo">SAMPLE</span>
+    </div>
+    <strong>Check official local updates</strong>
+    <p>Visit verified city and public-safety channels for current
+    announcements. No live incident has been confirmed by this card.</p>
+    <time>Demonstration content · Not a live alert</time>
+  </div>
+  <div class="card alert">
+    <div class="alert-top"><span class="dot"></span>
+      <span class="tag">PREPAREDNESS</span>
+      <span class="tag demo">SAMPLE</span>
+    </div>
+    <strong>Keep emergency essentials ready</strong>
+    <p>Save important contacts, keep medications accessible, and
+    identify a safe meeting point with your household.</p>
+    <time>General safety reminder</time>
+  </div>
+
+  <div class="section-head">
+    <div><h2>Report an incident</h2>
+    <div class="sub">Prototype only — reports are not sent anywhere</div></div>
+  </div>
+  <div class="card">
+    <p>For an emergency or a crime in progress, call 911 instead.
+    Do not submit sensitive personal information here.</p>
+    <button class="primary full" id="toggleReport" type="button"
+      aria-expanded="false" aria-controls="reportForm">Open report demo</button>
+    <form id="reportForm">
+      <label for="category">Type of concern</label>
+      <select id="category" required>
+        <option value="">Choose a category</option>
+        <option>Road or traffic concern</option>
+        <option>Community hazard</option>
+        <option>Suspicious activity</option>
+        <option>Other non-emergency concern</option>
+      </select>
+      <label for="area">General area (no exact address needed)</label>
+      <input id="area" maxlength="100" placeholder="Neighborhood or cross streets">
+      <label for="details">Description</label>
+      <textarea id="details" maxlength="500" placeholder="Describe the concern without names or sensitive details" required></textarea>
+      <button class="primary full" type="submit">Preview report</button>
+    </form>
+    <div id="reportMessage" role="status" aria-live="polite"></div>
+  </div>
+
+  <div class="section-head">
+    <div><h2>Safety resources</h2><div class="sub">External information sources</div></div>
+  </div>
+  <div class="resources">
+    <div class="resource">
+      <div><span>City of Racine</span><small>Official city website</small></div>
+      <a href="https://www.cityofracine.org/" target="_blank" rel="noopener">Visit site ↗</a>
+    </div>
+    <div class="resource">
+      <div><span>Ready.gov</span><small>Emergency preparedness guidance</small></div>
+      <a href="https://www.ready.gov/" target="_blank" rel="noopener">Learn more ↗</a>
+    </div>
+    <div class="resource">
+      <div><span>Wisconsin Emergency Management</span><small>Statewide preparedness information</small></div>
+      <a href="https://wem.wi.gov/" target="_blank" rel="noopener">Visit site ↗</a>
+    </div>
+  </div>
 </main>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+<footer>
+  RACINE ALERT • COMMUNITY SAFETY PROTOTYPE<br>
+  Not affiliated with or endorsed by any government agency.<br>
+  Always verify alerts with official sources. Call 911 for emergencies.
+</footer>
+
 <script>
-const incidents=[
-{id:1,title:'Sample road closure notice',category:'Traffic',area:'Racine',time:'Demo example',status:'Illustrative',lat:42.7261,lng:-87.7829,details:'Fictional sample used to demonstrate how a road-related update could appear. Not a real closure.'},
-{id:2,title:'Sample weather advisory',category:'Weather',area:'Mount Pleasant',time:'Demo example',status:'Illustrative',lat:42.7258,lng:-87.9084,details:'Fictional sample used to demonstrate a weather information card. Check the National Weather Service for real alerts.'},
-{id:3,title:'Sample community update',category:'Community',area:'Sturtevant',time:'Demo example',status:'Illustrative',lat:42.6981,lng:-87.8945,details:'Fictional sample used to demonstrate a community announcement. No real event is being reported.'}
-];
-const feed=document.getElementById('feed');const category=document.getElementById('categoryFilter');const area=document.getElementById('areaFilter');const search=document.getElementById('search');
-function render(){const c=category.value,a=area.value,q=search.value.trim().toLowerCase();const rows=incidents.filter(x=>(c==='all'||x.category===c)&&(a==='all'||x.area===a)&&(`${x.title} ${x.area} ${x.category} ${x.details}`.toLowerCase().includes(q)));document.getElementById('feedCount').textContent=`${rows.length} example${rows.length===1?'':'s'}`;feed.innerHTML=rows.length?rows.map(x=>`<article class="incident"><div class="incidenttop"><div><h3>${esc(x.title)}</h3><p>${esc(x.details)}</p></div><span class="tag demo">DEMO</span></div><div class="meta"><span>${esc(x.category)}</span><span>•</span><span>${esc(x.area)}</span><span>•</span><span>${esc(x.time)}</span></div></article>`).join(''):'<div class="empty">No sample updates match those filters.</div>';document.getElementById('count').textContent=incidents.length;}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-[category,area,search].forEach(el=>el.addEventListener('input',render));render();
-if(window.L){const map=L.map('map').setView([42.72,-87.88],11);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'}).addTo(map);incidents.forEach(x=>L.marker([x.lat,x.lng]).addTo(map).bindPopup(`<strong>${esc(x.title)}</strong><br>${esc(x.area)} · DEMO ONLY<br>${esc(x.details)}`));}
-const form=document.getElementById('reportForm');form.addEventListener('submit',e=>{e.preventDefault();const msg=document.getElementById('formMessage');msg.hidden=false;msg.textContent=`Demo preview only — Category: ${document.getElementById('reportCategory').value}; Area: ${document.getElementById('reportArea').value}. Your description has not been sent or saved. A production version would submit it securely for moderator review.`;});
+const toggle = document.getElementById("toggleReport");
+const form = document.getElementById("reportForm");
+const message = document.getElementById("reportMessage");
+
+toggle.addEventListener("click", () => {
+  const open = form.classList.toggle("open");
+  toggle.setAttribute("aria-expanded", String(open));
+  toggle.textContent = open ? "Close report demo" : "Open report demo";
+  message.textContent = "";
+});
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const category = document.getElementById("category").value;
+  const area = document.getElementById("area").value.trim();
+  const details = document.getElementById("details").value.trim();
+  message.style.cssText = "margin-top:14px;padding:12px;background:#fff2d7;border-radius:10px;font-size:13px;line-height:1.5";
+  message.textContent = "DEMO ONLY — Your preview has not been transmitted or saved. Category: " +
+    category + (area ? ". General area: " + area : "") +
+    ". Description: " + details +
+    ". A secure reporting service must be connected before real submissions are possible.";
+});
 </script>
-</body></html>
+</body>
+</html>
