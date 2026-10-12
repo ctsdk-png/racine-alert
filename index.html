@@ -1,338 +1,663 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101a30">
-<title>Racine Alert | Community Safety</title>
-<style>
-:root {
-  --bg:#f3f5f9; --navy:#101a30; --card:#fff;
-  --blue:#2459d3; --muted:#69758a; --line:#e4e8f0;
-  --red:#c62f3a; --gold:#f4bd55;
-}
-* {box-sizing:border-box}
-body {
-  margin:0; background:var(--bg); color:var(--navy);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-header {background:var(--navy);color:white;padding:24px 18px 26px}
-.top {display:flex;align-items:center;gap:12px;max-width:850px;margin:auto}
-.logo {background:var(--gold);color:var(--navy);border-radius:13px;
-  width:48px;height:48px;display:grid;place-items:center;font-size:25px;font-weight:900}
-.brand {font-size:22px;font-weight:800;letter-spacing:.2px}
-.tagline {color:#c5d0e4;font-size:12px;margin-top:4px}
-.hero {max-width:850px;margin:27px auto 0}
-.eyebrow {color:var(--gold);font-size:11px;font-weight:800;letter-spacing:2px}
-h1 {font-size:32px;line-height:1.12;margin:10px 0}
-.hero p {color:#d1d9e7;font-size:14px;line-height:1.6;margin-bottom:0}
-main {max-width:850px;margin:auto;padding:20px 15px 40px}
-.notice {background:#fff5e4;border:1px solid #f0d8a8;padding:12px 14px;
-  border-radius:12px;font-size:12px;line-height:1.5;margin-bottom:22px}
-.section-head {display:flex;justify-content:space-between;align-items:center;gap:8px;margin:24px 0 12px}
-h2 {font-size:18px;margin:0}
-.sub {font-size:12px;color:var(--muted);margin-top:5px}
-.grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.card {background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}
-.quick {display:flex;flex-direction:column;gap:9px;text-decoration:none;color:inherit;min-height:120px}
-.symbol {font-size:25px}
-.card strong {font-size:14px}
-.card p {color:var(--muted);font-size:12px;line-height:1.5;margin:0}
-.emergency {background:#fff0f0;border-color:#f0caca}
-.emergency .symbol {color:var(--red)}
-a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible {
-  outline:3px solid #739aff;outline-offset:3px
-}
-.alert {margin-bottom:11px}
-.alert-top {display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.dot {width:9px;height:9px;border-radius:50%;background:#d89a26}
-.tag {font-size:10px;font-weight:800;letter-spacing:.5px}
-.demo {color:#8a6414;background:#fff2d7;padding:5px 7px;border-radius:6px}
-.alert p {margin-top:8px}
-.alert time {font-size:11px;color:var(--muted)}
-.primary {border:0;border-radius:11px;background:var(--blue);color:white;
-  padding:13px 16px;font-weight:750;font-size:14px;cursor:pointer}
-.secondary {border:1px solid var(--line);border-radius:10px;background:white;
-  color:var(--navy);padding:10px 12px;font-weight:700;cursor:pointer}
-.full {width:100%;margin-top:12px}
-.resources {display:grid;gap:10px}
-.resource {display:flex;align-items:center;justify-content:space-between;gap:12px;
-  background:white;border:1px solid var(--line);border-radius:12px;padding:14px}
-.resource span {font-size:13px;font-weight:700}
-.resource small {display:block;color:var(--muted);font-size:11px;margin-top:4px}
-.resource a {color:var(--blue);font-size:12px;font-weight:750;text-decoration:none}
-label {display:block;font-size:12px;font-weight:750;margin:13px 0 6px}
-input,textarea,select {width:100%;padding:12px;border:1px solid #d5dbe6;
-  border-radius:10px;font:inherit;font-size:14px;background:white;color:var(--navy)}
-textarea {min-height:95px;resize:vertical}
-#reportForm {display:none;margin-top:12px}
-#reportForm.open {display:block}
-footer {text-align:center;padding:24px 16px 32px;color:var(--muted);
-  font-size:11px;line-height:1.7}
-@media(min-width:600px) {
-  header {padding:28px 25px}
-  .hero {margin-top:35px}
-  h1 {font-size:40px}
-  main {padding:24px 24px 45px}
-  .grid {grid-template-columns:repeat(4,minmax(0,1fr))}
-}
-</style>
-</head>
-<body>
-<header>
-  <div class="top">
-    <div class="logo" aria-hidden="true">R</div>
-    <div>
-      <div class="brand">RACINE ALERT</div>
-      <div class="tagline">COMMUNITY SAFETY • LOCAL AWARENESS</div>
-    </div>
-  </div>
-  <div class="hero">
-    <div class="eyebrow">YOUR COMMUNITY. YOUR SAFETY.</div>
-    <h1>Stay informed.<br>Stay prepared.</h1>
-    <p>A community-focused place for safety resources, local awareness,
-    and emergency information.</p>
-  </div>
-</header>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a32">
+  <meta name="description" content="Racine Alert — public safety resources and official weather alerts for Racine, Wisconsin.">
+  <title>Racine Alert | Public Safety</title>
 
-<main>
-  <div class="notice">
-    <strong>Important:</strong> This is an early prototype. Sample alerts
-    are not verified live incidents. This site is not monitored by emergency
-    dispatchers and does not replace official emergency services.
-  </div>
-
-  <div class="section-head">
-    <div><h2>Quick access</h2><div class="sub">Get help or find support</div></div>
-  </div>
-  <div class="grid">
-    <a class="card quick emergency" href="tel:911">
-      <span class="symbol">🚨</span><strong>Call 911</strong>
-      <p>Immediate police, fire, or medical emergencies.</p>
-    </a>
-    <a class="card quick" href="tel:988">
-      <span class="symbol">💙</span><strong>Crisis support</strong>
-      <p>Call or text 988 in the United States.</p>
-    </a>
-    <a class="card quick" href="https://www.211.org/">
-      <span class="symbol">🤝</span><strong>Community help</strong>
-      <p>Find local services through 211.</p>
-    </a>
-    <a class="card quick" href="https://www.weather.gov/">
-      <span class="symbol">🌦️</span><strong>Weather alerts</strong>
-      <p>Check official weather warnings and forecasts.</p>
-    </a>
-  </div>
-
- 
-<div class="section-head">
-  <div>
-    <h2>Official Weather Alerts</h2>
-    <div class="sub">Racine, Wisconsin · National Weather Service</div>
-  </div>
-  <span class="tag">LIVE FEED</span>
-</div>
-
-<div id="weatherAlerts" class="resources" aria-live="polite">
-  <div class="card">
-    <strong>Checking official weather alerts…</strong>
-    <p>Connecting to the National Weather Service.</p>
-  </div>
-</div>
-
-<p class="sub">
-  Weather information is provided by the National Weather Service.
-  Always open the official alert for complete instructions.
-</p>
-    <span class="tag demo">DEMO DATA</span>
-  </div>
-  <div class="card alert">
-    <div class="alert-top"><span class="dot"></span>
-      <span class="tag">COMMUNITY NOTICE</span>
-      <span class="tag demo">SAMPLE</span>
-    </div>
-    <strong>Check official local updates</strong>
-    <p>Visit verified city and public-safety channels for current
-    announcements. No live incident has been confirmed by this card.</p>
-    <time>Demonstration content · Not a live alert</time>
-  </div>
-  <div class="card alert">
-    <div class="alert-top"><span class="dot"></span>
-      <span class="tag">PREPAREDNESS</span>
-      <span class="tag demo">SAMPLE</span>
-    </div>
-    <strong>Keep emergency essentials ready</strong>
-    <p>Save important contacts, keep medications accessible, and
-    identify a safe meeting point with your household.</p>
-    <time>General safety reminder</time>
-  </div>
-
-  <div class="section-head">
-    <div><h2>Report an incident</h2>
-    <div class="sub">Prototype only — reports are not sent anywhere</div></div>
-  </div>
-  <div class="card">
-    <p>For an emergency or a crime in progress, call 911 instead.
-    Do not submit sensitive personal information here.</p>
-    <button class="primary full" id="toggleReport" type="button"
-      aria-expanded="false" aria-controls="reportForm">Open report demo</button>
-    <form id="reportForm">
-      <label for="category">Type of concern</label>
-      <select id="category" required>
-        <option value="">Choose a category</option>
-        <option>Road or traffic concern</option>
-        <option>Community hazard</option>
-        <option>Suspicious activity</option>
-        <option>Other non-emergency concern</option>
-      </select>
-      <label for="area">General area (no exact address needed)</label>
-      <input id="area" maxlength="100" placeholder="Neighborhood or cross streets">
-      <label for="details">Description</label>
-      <textarea id="details" maxlength="500" placeholder="Describe the concern without names or sensitive details" required></textarea>
-      <button class="primary full" type="submit">Preview report</button>
-    </form>
-    <div id="reportMessage" role="status" aria-live="polite"></div>
-  </div>
-
-  <div class="section-head">
-    <div><h2>Safety resources</h2><div class="sub">External information sources</div></div>
-  </div>
-  <div class="resources">
-    <div class="resource">
-      <div><span>City of Racine</span><small>Official city website</small></div>
-      <a href="https://www.cityofracine.org/" target="_blank" rel="noopener">Visit site ↗</a>
-    </div>
-    <div class="resource">
-      <div><span>Ready.gov</span><small>Emergency preparedness guidance</small></div>
-      <a href="https://www.ready.gov/" target="_blank" rel="noopener">Learn more ↗</a>
-    </div>
-    <div class="resource">
-      <div><span>Wisconsin Emergency Management</span><small>Statewide preparedness information</small></div>
-      <a href="https://wem.wi.gov/" target="_blank" rel="noopener">Visit site ↗</a>
-    </div>
-  </div>
-</main>
-
-<footer>
-  RACINE ALERT • COMMUNITY SAFETY PROTOTYPE<br>
-  Not affiliated with or endorsed by any government agency.<br>
-  Always verify alerts with official sources. Call 911 for emergencies.
-</footer>
-
-<script>
-
-const weatherBox = document.getElementById("weatherAlerts");
-
-async function loadRacineWeatherAlerts() {
-  const officialUrl =
-    "https://api.weather.gov/alerts/active?point=42.7261,-87.7829";
-
-  try {
-    const response = await fetch(officialUrl, {
-      headers: { Accept: "application/geo+json" }
-    });
-
-    if (!response.ok) throw new Error("Feed unavailable");
-
-    const data = await response.json();
-    const alerts = data.features || [];
-
-    weatherBox.replaceChildren();
-
-    if (alerts.length === 0) {
-      const card = document.createElement("div");
-      card.className = "card";
-      const title = document.createElement("strong");
-      title.textContent = "No active NWS alerts returned for this location";
-      const note = document.createElement("p");
-      note.textContent =
-        "This does not mean all hazards are absent. Check official sources for updates.";
-      card.append(title, note);
-      weatherBox.append(card);
+  <style>
+    :root {
+      --navy: #101a32;
+      --navy-light: #192847;
+      --gold: #e7b84b;
+      --paper: #f4f6fa;
+      --white: #ffffff;
+      --ink: #172033;
+      --muted: #637087;
+      --border: #dce2ec;
+      --red: #b42332;
+      --green: #176b48;
     }
 
-    alerts.forEach(item => {
-      const p = item.properties || {};
-      const card = document.createElement("div");
-      card.className = "card alert";
+    * { box-sizing: border-box; }
 
-      const title = document.createElement("strong");
-      title.textContent = p.event || "Weather alert";
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.55;
+    }
 
-      const headline = document.createElement("p");
-      headline.textContent = p.headline || p.description ||
-        "Open the official source for details.";
+    a { color: #244fc2; overflow-wrap: anywhere; }
 
-      const severity = document.createElement("p");
-      severity.textContent =
-        "Severity: " + (p.severity || "Not specified");
+    .hero {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      color: var(--white);
+      padding: 28px 18px 30px;
+      border-bottom: 5px solid var(--gold);
+    }
 
-      card.append(title, headline, severity);
+    .container {
+      width: min(100% - 28px, 900px);
+      margin: 0 auto;
+    }
 
-      if (p.ends) {
-        const end = document.createElement("p");
-        end.className = "sub";
-        end.textContent = "Alert ends: " +
-          new Date(p.ends).toLocaleString();
-        card.append(end);
-      }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
+    .logo {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-size: 25px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 6vw, 36px);
+      line-height: 1.15;
+    }
+
+    .brand p {
+      margin: 5px 0 0;
+      color: #d8deeb;
+      font-size: 13px;
+    }
+
+    .hero-copy {
+      margin: 24px 0 0;
+      max-width: 650px;
+      color: #edf1f9;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 12px 14px;
+      border: 1px solid #485775;
+      border-radius: 12px;
+      background: #192847;
+      font-size: 13px;
+    }
+
+    main { padding: 22px 0 36px; }
+
+    section { margin-bottom: 28px; }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: 21px;
+      margin: 0;
+      color: var(--navy);
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 4px 0 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #fff2cf;
+      color: #654700;
+      border-radius: 30px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      min-width: 0;
+      padding: 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      box-shadow: 0 3px 12px rgba(16, 26, 50, .045);
+    }
+
+    .card h3, .card strong {
+      color: var(--navy);
+    }
+
+    .card h3 {
+      font-size: 16px;
+      margin: 0 0 6px;
+    }
+
+    .card p {
+      margin: 7px 0;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .card .sub { font-size: 12px; }
+
+    .resource-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-weight: 750;
+      font-size: 14px;
+    }
+
+    .weather-card {
+      border-left: 4px solid var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .weather-card.severe {
+      border-left-color: var(--red);
+    }
+
+    .weather-card h3 { font-size: 17px; }
+
+    .status {
+      display: inline-block;
+      margin: 6px 4px 4px 0;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: #edf1f8;
+      color: #34415a;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .status.warning {
+      background: #fde8e8;
+      color: #8e1b27;
+    }
+
+    .button {
+      display: inline-block;
+      border: 0;
+      border-radius: 10px;
+      background: var(--navy);
+      color: white;
+      text-decoration: none;
+      padding: 11px 14px;
+      font-size: 14px;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .button.gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .field { margin: 13px 0; }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #c7cfdd;
+      border-radius: 9px;
+      font: inherit;
+      font-size: 15px;
+      background: white;
+      color: var(--ink);
+    }
+
+    textarea { min-height: 110px; resize: vertical; }
+
+    .demo-result {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 10px;
+      background: #e8f6ee;
+      border: 1px solid #b9e0c8;
+      color: #174c32;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      background: var(--navy);
+      color: #dce3ef;
+      padding: 22px 0;
+      font-size: 12px;
+    }
+
+    footer p { margin: 7px 0; }
+
+    @media (min-width: 640px) {
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .hero { padding-top: 36px; padding-bottom: 38px; }
+    }
+
+    @media (max-width: 360px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero">
+    <div class="container">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">R</div>
+        <div>
+          <h1>Racine Alert</h1>
+          <p>PUBLIC SAFETY · RACINE, WISCONSIN</p>
+        </div>
+      </div>
+
+      <p class="hero-copy">
+        A central place to find emergency contacts, official weather
+        information, and public-safety resources for the Racine community.
+      </p>
+
+      <div class="notice">
+        <strong>In an emergency, call 911.</strong>
+        This independent website is not an emergency dispatch service
+        and is not affiliated with the City of Racine or the National
+        Weather Service.
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Quick Access</h2>
+          <p class="sub">Important contacts and trusted resources.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>🚨 Emergency</h3>
+          <p>Police, fire, or medical emergency.</p>
+          <a class="resource-link" href="tel:911">Call 911 ↗</a>
+        </article>
+
+        <article class="card">
+          <h3>💜 Crisis Support</h3>
+          <p>Free, confidential emotional crisis support.</p>
+          <a class="resource-link" href="tel:988">Call or text 988 ↗</a>
+        </article>
+
+        <article class="card">
+          <h3>🤝 Community Help</h3>
+          <p>Find local social services and assistance.</p>
+          <a class="resource-link" href="https://211wisconsin.communityos.org/" target="_blank" rel="noopener noreferrer">Wisconsin 211 ↗</a>
+        </article>
+
+        <article class="card">
+          <h3>🌦️ Official Weather</h3>
+          <p>Warnings, watches, and weather forecasts.</p>
+          <a class="resource-link" href="https://www.weather.gov/mkx/" target="_blank" rel="noopener noreferrer">NWS Milwaukee ↗</a>
+        </article>
+
+        <article class="card">
+          <h3>🏛️ City Information</h3>
+          <p>Official City of Racine services and notices.</p>
+          <a class="resource-link" href="https://www.cityofracine.org/" target="_blank" rel="noopener noreferrer">Visit City Website ↗</a>
+        </article>
+
+        <article class="card">
+          <h3>🛟 Emergency Planning</h3>
+          <p>Prepare for disasters and other hazards.</p>
+          <a class="resource-link" href="https://ready.gov/" target="_blank" rel="noopener noreferrer">Ready.gov ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="weather">
+      <div class="section-head">
+        <div>
+          <h2>Official Weather Alerts</h2>
+          <p class="sub">Racine, Wisconsin · National Weather Service</p>
+        </div>
+        <span class="tag">NWS FEED</span>
+      </div>
+
+      <div id="weatherStatus" class="card" aria-live="polite">
+        <strong>Checking the official weather feed…</strong>
+        <p class="sub">Alert information may be temporarily unavailable.</p>
+      </div>
+
+      <div id="weatherAlerts" aria-live="polite"></div>
+
+      <div class="card">
+        <strong>Check the official source</strong>
+        <p>
+          Always verify an alert's affected area, expiration time, and
+          instructions. This feed does not cover every kind of public-safety
+          incident.
+        </p>
+        <a class="resource-link" href="https://www.weather.gov/mkx/" target="_blank" rel="noopener noreferrer">Open NWS Milwaukee ↗</a>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>Community Information</h2>
+          <p class="sub">A space for future verified community notices.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <strong>Community notices are not connected yet</strong>
+        <p>
+          This version does not receive live police reports, crime reports,
+          or community-submitted incident alerts. Only information verified
+          through an official source should be published here.
+        </p>
+      </div>
+    </section>
+
+    <section id="report">
+      <div class="section-head">
+        <div>
+          <h2>Incident Report Demo</h2>
+          <p class="sub">Preview a report locally on this device.</p>
+        </div>
+        <span class="tag">DEMO ONLY</span>
+      </div>
+
+      <div class="card">
+        <p>
+          <strong>Important:</strong> This form does not contact emergency
+          services, submit a report to the City, or save information to a
+          server. Do not include sensitive personal information.
+        </p>
+
+        <form id="reportForm">
+          <div class="field">
+            <label for="incidentType">Type of incident</label>
+            <select id="incidentType" required>
+              <option value="">Choose a category</option>
+              <option>Road hazard</option>
+              <option>Weather-related hazard</option>
+              <option>Public infrastructure concern</option>
+              <option>Community safety concern</option>
+              <option>Other non-emergency concern</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="incidentLocation">General location</label>
+            <input id="incidentLocation" maxlength="150"
+              placeholder="Street or nearby landmark" required>
+          </div>
+
+          <div class="field">
+            <label for="incidentDetails">Description</label>
+            <textarea id="incidentDetails" maxlength="1000"
+              placeholder="Describe what you observed. Avoid names and sensitive information."
+              required></textarea>
+          </div>
+
+          <button class="button gold" type="submit">Preview Demo Report</button>
+        </form>
+
+        <div id="reportPreview" class="demo-result" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <strong>Racine Alert</strong>
+      <p>Independent community safety information project.</p>
+      <p>Weather data source: National Weather Service (NWS).</p>
+      <p>Always follow official emergency instructions. Call 911 for emergencies.</p>
+    </div>
+  </footer>
+
+  <script>
+    const weatherBox = document.getElementById("weatherAlerts");
+    const weatherStatus = document.getElementById("weatherStatus");
+
+    const nwsUrl =
+      "https://api.weather.gov/alerts/active?point=42.7261,-87.7829";
+
+    function makeTextElement(tag, text) {
+      const element = document.createElement(tag);
+      element.textContent = text;
+      return element;
+    }
+
+    function makeWeatherLink(url, label) {
       const link = document.createElement("a");
-      link.href = "https://www.weather.gov/mkx/";
+      link.href = url;
       link.target = "_blank";
-      link.rel = "noopener";
-      link.textContent = "Official NWS Milwaukee office ↗";
-      link.style.cssText =
-        "display:inline-block;margin-top:10px;color:#2459d3;font-weight:700;font-size:13px";
-      card.append(link);
+      link.rel = "noopener noreferrer";
+      link.className = "resource-link";
+      link.textContent = label;
+      return link;
+    }
 
-      weatherBox.append(card);
-    });
-  } catch (error) {
-    weatherBox.replaceChildren();
+    function showWeatherFallback(message) {
+      weatherStatus.replaceChildren();
+      weatherStatus.append(
+        makeTextElement("strong", message),
+        makeTextElement(
+          "p",
+          "The live feed could not be confirmed. This does not mean there are no active hazards."
+        ),
+        makeWeatherLink(
+          "https://www.weather.gov/mkx/",
+          "Check official NWS weather information ↗"
+        )
+      );
+    }
 
-    const card = document.createElement("div");
-    card.className = "card";
-    const title = document.createElement("strong");
-    title.textContent = "Weather feed temporarily unavailable";
-    const note = document.createElement("p");
-    note.textContent =
-      "Check the official National Weather Service website directly.";
-    const link = document.createElement("a");
-    link.href = "https://www.weather.gov/mkx/";
-    link.target = "_blank";
-    link.rel = "noopener";
-    link.textContent = "Open official weather updates ↗";
+    async function loadRacineWeatherAlerts() {
+      weatherStatus.replaceChildren(
+        makeTextElement("strong", "Loading official weather alerts…")
+      );
+      weatherBox.replaceChildren();
 
-    card.append(title, note, link);
-    weatherBox.append(card);
-  }
-}
+      try {
+        const response = await fetch(nwsUrl, {
+          headers: {
+            "Accept": "application/geo+json"
+          },
+          cache: "no-store"
+        });
 
-loadRacineWeatherAlerts();
-const toggle = document.getElementById("toggleReport");
-const form = document.getElementById("reportForm");
-const message = document.getElementById("reportMessage");
+        if (!response.ok) {
+          throw new Error("Weather service returned " + response.status);
+        }
 
-toggle.addEventListener("click", () => {
-  const open = form.classList.toggle("open");
-  toggle.setAttribute("aria-expanded", String(open));
-  toggle.textContent = open ? "Close report demo" : "Open report demo";
-  message.textContent = "";
-});
+        const data = await response.json();
+        const alerts = Array.isArray(data.features) ? data.features : [];
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const category = document.getElementById("category").value;
-  const area = document.getElementById("area").value.trim();
-  const details = document.getElementById("details").value.trim();
-  message.style.cssText = "margin-top:14px;padding:12px;background:#fff2d7;border-radius:10px;font-size:13px;line-height:1.5";
-  message.textContent = "DEMO ONLY — Your preview has not been transmitted or saved. Category: " +
-    category + (area ? ". General area: " + area : "") +
-    ". Description: " + details +
-    ". A secure reporting service must be connected before real submissions are possible.";
-});
-</script>
+        weatherStatus.replaceChildren(
+          makeTextElement(
+            "strong",
+            "Weather feed connected"
+          ),
+          makeTextElement(
+            "p",
+            "Feed checked: " + new Date().toLocaleString()
+          )
+        );
+
+        if (alerts.length === 0) {
+          weatherStatus.append(
+            makeTextElement(
+              "p",
+              "No active alerts were returned for the selected point. Check the official NWS site for updates."
+            )
+          );
+          return;
+        }
+
+        alerts.forEach(item => {
+          const p = item.properties || {};
+          const card = document.createElement("article");
+          card.className = "card weather-card";
+
+          if (
+            p.severity === "Severe" ||
+            p.severity === "Extreme"
+          ) {
+            card.classList.add("severe");
+          }
+
+          card.append(
+            makeTextElement("h3", p.event || "Weather alert"),
+            makeTextElement(
+              "p",
+              "Affected area: " + (p.areaDesc || "Not specified")
+            )
+          );
+
+          const severity = makeTextElement(
+            "span",
+            "Severity: " + (p.severity || "Not specified")
+          );
+          severity.className = "status";
+
+          const urgency = makeTextElement(
+            "span",
+            "Urgency: " + (p.urgency || "Not specified")
+          );
+          urgency.className = "status";
+
+          if (
+            p.severity === "Severe" ||
+            p.severity === "Extreme"
+          ) {
+            severity.classList.add("warning");
+          }
+
+          card.append(severity, urgency);
+
+          card.append(
+            makeTextElement(
+              "p",
+              p.headline || p.description ||
+                "Open the official source for complete details."
+            )
+          );
+
+          if (p.effective || p.onset) {
+            card.append(
+              makeTextElement(
+                "p",
+                "Effective: " +
+                  new Date(p.effective || p.onset).toLocaleString()
+              )
+            );
+          }
+
+          const expiration = p.ends || p.expires;
+          if (expiration) {
+            card.append(
+              makeTextElement(
+                "p",
+                "Expires: " +
+                  new Date(expiration).toLocaleString()
+              )
+            );
+          }
+
+          if (p.instruction) {
+            card.append(
+              makeTextElement(
+                "p",
+                "Instructions: " + p.instruction
+              )
+            );
+          }
+
+          const officialAlertUrl =
+            typeof p.web === "string" &&
+            p.web.startsWith("https://")
+              ? p.web
+              : "https://www.weather.gov/mkx/";
+
+          card.append(
+            makeWeatherLink(
+              officialAlertUrl,
+              "View official alert details ↗"
+            )
+          );
+
+          weatherBox.append(card);
+        });
+      } catch (error) {
+        showWeatherFallback(
+          "The live weather feed is temporarily unavailable."
+        );
+      }
+    }
+
+    loadRacineWeatherAlerts();
+
+    document.getElementById("reportForm").addEventListener(
+      "submit",
+      function (event) {
+        event.preventDefault();
+
+        const type = document.getElementById("incidentType").value;
+        const location =
+          document.getElementById("incidentLocation").value.trim();
+        const details =
+          document.getElementById("incidentDetails").value.trim();
+
+        const preview = document.getElementById("reportPreview");
+        preview.replaceChildren(
+          makeTextElement("strong", "Demo preview — not submitted"),
+          makeTextElement("p", "Category: " + type),
+          makeTextElement("p", "Location: " + location),
+          makeTextElement("p", "Description: " + details),
+          makeTextElement(
+            "p",
+            "This report has not been sent or saved. Contact the appropriate official service to report a real concern."
+          )
+        );
+
+        preview.style.display = "block";
+      }
+    );
+  </script>
 </body>
 </html>
