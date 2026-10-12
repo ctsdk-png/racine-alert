@@ -18,7 +18,6 @@
       --muted: #637087;
       --border: #dce2ec;
       --red: #b42332;
-      --green: #176b48;
     }
 
     * { box-sizing: border-box; }
@@ -32,7 +31,10 @@
       line-height: 1.55;
     }
 
-    a { color: #244fc2; overflow-wrap: anywhere; }
+    a {
+      color: #244fc2;
+      overflow-wrap: anywhere;
+    }
 
     .hero {
       background: linear-gradient(135deg, var(--navy), var(--navy-light));
@@ -143,9 +145,7 @@
       box-shadow: 0 3px 12px rgba(16, 26, 50, .045);
     }
 
-    .card h3, .card strong {
-      color: var(--navy);
-    }
+    .card h3, .card strong { color: var(--navy); }
 
     .card h3 {
       font-size: 16px;
@@ -172,9 +172,7 @@
       margin-bottom: 12px;
     }
 
-    .weather-card.severe {
-      border-left-color: var(--red);
-    }
+    .weather-card.severe { border-left-color: var(--red); }
 
     .weather-card h3 { font-size: 17px; }
 
@@ -212,11 +210,9 @@
       color: var(--navy);
     }
 
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 14px;
+    .button:disabled {
+      opacity: .6;
+      cursor: wait;
     }
 
     .field { margin: 13px 0; }
@@ -361,6 +357,12 @@
 
       <div id="weatherAlerts" aria-live="polite"></div>
 
+      <div style="margin: 12px 0 18px;">
+        <button class="button" id="refreshWeather" type="button">
+          Refresh Weather Alerts
+        </button>
+      </div>
+
       <div class="card">
         <strong>Check the official source</strong>
         <p>
@@ -452,6 +454,7 @@
   <script>
     const weatherBox = document.getElementById("weatherAlerts");
     const weatherStatus = document.getElementById("weatherStatus");
+    const refreshButton = document.getElementById("refreshWeather");
 
     const nwsUrl =
       "https://api.weather.gov/alerts/active?point=42.7261,-87.7829";
@@ -488,6 +491,8 @@
     }
 
     async function loadRacineWeatherAlerts() {
+      refreshButton.disabled = true;
+      refreshButton.textContent = "Refreshing…";
       weatherStatus.replaceChildren(
         makeTextElement("strong", "Loading official weather alerts…")
       );
@@ -509,10 +514,7 @@
         const alerts = Array.isArray(data.features) ? data.features : [];
 
         weatherStatus.replaceChildren(
-          makeTextElement(
-            "strong",
-            "Weather feed connected"
-          ),
+          makeTextElement("strong", "Weather feed connected"),
           makeTextElement(
             "p",
             "Feed checked: " + new Date().toLocaleString()
@@ -593,18 +595,14 @@
             card.append(
               makeTextElement(
                 "p",
-                "Expires: " +
-                  new Date(expiration).toLocaleString()
+                "Expires: " + new Date(expiration).toLocaleString()
               )
             );
           }
 
           if (p.instruction) {
             card.append(
-              makeTextElement(
-                "p",
-                "Instructions: " + p.instruction
-              )
+              makeTextElement("p", "Instructions: " + p.instruction)
             );
           }
 
@@ -627,9 +625,13 @@
         showWeatherFallback(
           "The live weather feed is temporarily unavailable."
         );
+      } finally {
+        refreshButton.disabled = false;
+        refreshButton.textContent = "Refresh Weather Alerts";
       }
     }
 
+    refreshButton.addEventListener("click", loadRacineWeatherAlerts);
     loadRacineWeatherAlerts();
 
     document.getElementById("reportForm").addEventListener(
